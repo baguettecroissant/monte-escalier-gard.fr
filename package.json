@@ -1,0 +1,23 @@
+{
+  "name": "monte-escalier-gard-fr",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.1.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.6",
+    "prismjs": "^1.30.0"
+  },
+  "devDependencies": {
+    "lightningcss-darwin-arm64": "^1.32.0"
+  }
+}

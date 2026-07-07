@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import communes from '../data/communes.json';
+
+const title = "Monte-Escalier dans le Gard (30) | Annuaire Installation par Ville";
+const description = "Retrouvez nos guides d'accessibilité senior, tarifs locaux et demandes d'estimation gratuite pour toutes les communes du Gard. Devis gratuits.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Villes du Gard (30)" }
+];
+
+// Group communes by intercommunalité
+const groups: Record<string, typeof communes> = {};
+communes.forEach(c => {
+  const interco = c.intercommunalite || "Autres Communes du Gard";
+  if (!groups[interco]) {
+    groups[interco] = [];
+  }
+  groups[interco].push(c);
+});
+
+// Sort interco groups by number of communes descending, putting "Autres Communes" last
+const sortedGroups = Object.entries(groups).sort((a, b) => {
+  if (a[0].startsWith("Autres")) return 1;
+  if (b[0].startsWith("Autres")) return -1;
+  return b[1].length - a[1].length;
+});
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl="https://monte-escalier-gard.fr/communes/"
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Annuaire des Monte-Escaliers par Commune du Gard (30)
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Sélectionnez votre commune ci-dessous pour accéder aux tarifs locaux, aux aides financières de votre communauté d'agglomération ou métropole (APA 30, MaPrimeAdapt') et obtenir une estimation gratuite.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 45px;">
+        {sortedGroups.map(([groupName, list]) => (
+          <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-sm);">
+            <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              🏛️ {groupName} <span style="background: var(--primary-light); color: var(--secondary); font-size: 14px; padding: 3px 10px; border-radius: 20px; font-weight: bold;">{list.length} communes</span>
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+              {list.map((c) => (
+                <div style="background: var(--bg); border: 1.5px solid var(--border-color); padding: 20px; border-radius: 12px; transition: var(--transition);">
+                  <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 12px;">
+                    {c.nom} ({c.codePostal})
+                  </h3>
+                  <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px;">
+                    <a href={`/monte-escalier-${c.slug}/`} style="color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                      ♿ Installation sur Mesure &rarr;
+                    </a>
+                    <a href={`/installateur-monte-escalier-${c.slug}/`} style="color: var(--primary); font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                      👤 Installateurs Agréés &rarr;
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

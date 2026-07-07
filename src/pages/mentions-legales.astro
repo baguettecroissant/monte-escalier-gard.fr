@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import config from '../data/config.json';
+
+const title = `Mentions Légales | ${config.brandName}`;
+const description = `Mentions légales et informations éditoriales pour le site ${config.domain}.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Mentions Légales" }
+];
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 800px; font-size: 18px; line-height: 1.6; color: var(--text);">
+      <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 25px;">
+        Mentions Légales
+      </h1>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">1. Présentation du site</h2>
+      <p style="margin-bottom: 15px;">
+        En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site internet <strong>{config.domain}</strong> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
+      </p>
+      <ul style="margin-left: 20px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 8px;">
+        <li><strong>Propriétaire :</strong> Service de mise en relation indépendant Rank &amp; Rent.</li>
+        <li><strong>Responsable publication :</strong> Directeur de la publication — contact@baguettecroissant.com</li>
+        <li><strong>Hébergeur :</strong> Cloudflare Inc. — 101 Townsend St, San Francisco, CA 94107, USA</li>
+      </ul>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">2. Propriété intellectuelle</h2>
+      <p style="margin-bottom: 15px;">
+        Le propriétaire du site est propriétaire des droits de propriété intellectuelle ou détient les droits d'usage sur tous les éléments accessibles sur le site, notamment les textes, images, graphismes, logos, icônes, sons, logiciels.
+      </p>
+      <p style="margin-bottom: 15px;">
+        Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.
+      </p>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">3. Limites de responsabilité</h2>
+      <p style="margin-bottom: 15px;">
+        <strong>{config.domain}</strong> agit en tant que plateforme de mise en relation de projets de travaux. Le site ne réalise pas lui-même les prestations d'installation ou de pose de monte-escaliers. 
+        Les estimations de prix issues de notre configurateur en ligne sont purement indicatives et n'engagent en aucun cas la responsabilité du site. Seuls les devis détaillés rédigés par les professionnels agréés partenaires font foi.
+      </p>
+      <p style="margin-bottom: 15px;">
+        Le site ne pourra être tenu responsable des dommages directs et indirects causés au matériel de l'utilisateur, lors de l'accès au site internet.
+      </p>
+    </div>
+  </section>
+</Layout>

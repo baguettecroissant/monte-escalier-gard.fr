@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ea580c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c2d12;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Rect -->
+  <rect width="512" height="512" rx="128" fill="url(#grad)" />
+  
+  <!-- Stylized staircase + chairlift lift icon -->
+  <!-- Stair steps -->
+  <path d="M96 416h80v-80h80v-80h80v-80h80v-80" fill="none" stroke="#ffffff" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Chair seat -->
+  <path d="M290 190h60v60M290 190v-40" fill="none" stroke="#fef08a" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- User head -->
+  <circle cx="290" cy="90" r="28" fill="#fef08a" />
+</svg>

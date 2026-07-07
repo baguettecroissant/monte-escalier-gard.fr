@@ -1,0 +1,195 @@
+---
+// ExitIntentPopup.astro
+---
+
+<div class="exit-intent-backdrop" id="exit-intent-backdrop" aria-hidden="true" role="dialog">
+  <div class="exit-intent-modal" style="background: white; max-width: 550px; width: 90%; border-radius: var(--radius-md); overflow: hidden; position: relative; box-shadow: var(--shadow-lg); border: 2px solid var(--border-color); transform: scale(0.9); transition: transform 0.3s ease;">
+    <!-- Top colored decorative bar -->
+    <div class="modal-stripe" style="height: 6px; background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);"></div>
+    
+    <!-- Close Button -->
+    <button class="close-modal-btn" id="close-modal-btn" aria-label="Fermer la fenêtre" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; color: var(--text-muted); cursor: pointer; line-height: 1; z-index: 10;">&times;</button>
+    
+    <!-- Content -->
+    <div class="modal-body" style="padding: 40px 30px 30px; text-align: center;">
+      <div class="modal-icon" style="font-size: 48px; margin-bottom: 15px; display: inline-block;">🏛️</div>
+      <h3 style="font-size: 24px; margin-bottom: 12px; color: var(--primary); font-family: var(--font-heading); font-weight: 800;">Attendez ! Assurez le maintien à domicile de vos proches en toute sécurité</h3>
+      <p class="modal-desc" style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-bottom: 25px; font-family: var(--font-body);">
+        Dans le Gard (30), plus de 25% de la population a dépassé les 60 ans. L'installation d'un monte-escalier sur mesure (droit, tournant, extérieur) s'effectue en quelques heures seulement sans travaux et prévient efficacement les risques de chute.
+      </p>
+      
+      <!-- Bullet Points -->
+      <ul class="modal-bullets" style="list-style: none; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; font-family: var(--font-body);">
+        <li style="display: flex; gap: 10px; font-size: 15px; color: var(--text);">
+          <span class="bullet-check" style="color: var(--secondary); font-weight: bold;">✓</span>
+          <span><strong>Aides &amp; Financement 30 :</strong> MaPrimeAdapt' (Anah), APA départementale (Conseil Départemental du Gard) et crédit d'impôt de 25% cumulables.</span>
+        </li>
+        <li style="display: flex; gap: 10px; font-size: 15px; color: var(--text);">
+          <span class="bullet-check" style="color: var(--secondary); font-weight: bold;">✓</span>
+          <span><strong>Essai gratuit à domicile :</strong> Un conseiller gardois vient prendre les cotes de votre escalier sans engagement.</span>
+        </li>
+        <li style="display: flex; gap: 10px; font-size: 15px; color: var(--text);">
+          <span class="bullet-check" style="color: var(--secondary); font-weight: bold;">✓</span>
+          <span><strong>3 Devis Comparatifs :</strong> Trouvez les installateurs agréés les plus compétitifs du Gard.</span>
+        </li>
+      </ul>
+      
+      <!-- CTA Actions -->
+      <div class="modal-actions" style="display: flex; flex-direction: column; gap: 12px;">
+        <button class="btn-primary pulse-btn" id="exit-popup-cta" style="padding: 14px 20px; font-weight: bold; border: none; cursor: pointer; color: white; border-radius: 50px; width: 100%;">
+          📋 Recevoir mes devis gratuits &rarr;
+        </button>
+        <button class="opt-out-btn" id="exit-popup-opt-out" style="background: none; border: none; font-size: 13px; color: var(--text-muted); cursor: pointer; text-decoration: underline; line-height: 1.4; font-family: var(--font-body); width: 100%;">
+          Non merci, je préfère continuer à monter les escaliers à pied malgré les risques de chute
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .exit-intent-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(6, 95, 70, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .exit-intent-backdrop.show {
+    display: flex;
+    opacity: 1;
+  }
+  .exit-intent-backdrop.show .exit-intent-modal {
+    transform: scale(1) !important;
+  }
+  .close-modal-btn:hover {
+    color: var(--primary) !important;
+  }
+  .opt-out-btn:hover {
+    color: var(--text) !important;
+  }
+
+  /* Pulsing button effect */
+  .pulse-btn {
+    animation: pulseGlow 2.5s infinite;
+  }
+
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(185, 28, 28, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(185, 28, 28, 0);
+    }
+  }
+
+  /* Global pulse highlight for lead forms on CTA click */
+  :global(.pulse-form) {
+    animation: formPulseGlow 1s ease-in-out infinite alternate !important;
+    transition: all 0.3s ease !important;
+  }
+
+  @keyframes formPulseGlow {
+    from {
+      box-shadow: var(--shadow-lg), 0 0 0 0px rgba(185, 28, 28, 0.4) !important;
+      border-color: var(--border-color) !important;
+    }
+    to {
+      box-shadow: var(--shadow-lg), 0 0 0 10px rgba(185, 28, 28, 0.25) !important;
+      border-color: var(--primary) !important;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const backdrop = document.getElementById('exit-intent-backdrop');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const ctaBtn = document.getElementById('exit-popup-cta');
+    const optOutBtn = document.getElementById('exit-popup-opt-out');
+
+    if (!backdrop) return;
+
+    // localStorage key
+    const isShownKey = 'monte_escalier_exit_popup_shown_30';
+    if (localStorage.getItem(isShownKey) === 'true') return;
+
+    let alreadyShown = false;
+
+    const showModal = () => {
+      if (alreadyShown) return;
+      alreadyShown = true;
+      localStorage.setItem(isShownKey, 'true');
+      backdrop.style.display = 'flex';
+      void backdrop.offsetWidth;
+      backdrop.classList.add('show');
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('scroll', handleScroll);
+      clearTimeout(mobileTimer);
+    };
+
+    const closeModal = () => {
+      backdrop.classList.remove('show');
+      setTimeout(() => {
+        backdrop.style.display = 'none';
+      }, 300);
+    };
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY < 20) {
+        showModal();
+      }
+    };
+
+    // Scroll trigger (shows after scrolling 50% of the page)
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+      if (scrollPercent > 0.5) {
+        showModal();
+      }
+    };
+
+    // Mobile timeout trigger (shows after 35 seconds of inactivity/staying)
+    const mobileTimer = setTimeout(() => {
+      showModal();
+    }, 35000);
+
+    // Event listeners
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('scroll', handleScroll);
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (optOutBtn) optOutBtn.addEventListener('click', closeModal);
+    
+    if (ctaBtn) {
+      ctaBtn.addEventListener('click', () => {
+        closeModal();
+        const targetForm = document.getElementById('devis');
+        if (targetForm) {
+          targetForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetForm.classList.add('pulse-form');
+          setTimeout(() => {
+            targetForm.classList.remove('pulse-form');
+          }, 3000);
+        }
+      });
+    }
+
+    // Close on backdrop click
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        closeModal();
+      }
+    });
+  });
+</script>

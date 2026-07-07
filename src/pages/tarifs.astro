@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+
+const title = "Tarifs Monte-Escalier dans le Gard (30) en 2026 | Prix Achat & Pose";
+const description = "Retrouvez la grille de prix détaillée pour l'achat et la pose d'un monte-escalier dans le Gard (30). Tarifs modèles droit, courbe, extérieur et aides.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Tarifs Monte-Escalier 2026" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">📊 Guide Tarifaire Officiel 2026</span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Quel est le Prix d'un Monte-Escalier dans le Gard ?
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Les tarifs d'un monte-escalier dépendent principalement de la forme de l'escalier (droit, tournant sur mesure ou extérieur) et du niveau d'autonomie requis (siège pivotant motorisé, options de sécurité actives, charge utile). Voici les coûts moyens constatés dans le Gard (30).
+        </p>
+      </div>
+
+      <div class="two-column-layout" style="align-items: start;">
+        <!-- Left: Table & Details -->
+        <div>
+          <!-- Visual Decorative Banner -->
+          <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 25px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: white;">
+            <div>
+              <span style="font-size: 48px; display: block; margin-bottom: 8px;">🤝</span>
+              <h2 style="color: white; font-size: 24px; font-weight: 800; margin: 0;">Budget &amp; Maintien à Domicile Gard 2026</h2>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); margin-bottom: 35px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 16px;">
+              <thead>
+                <tr style="background: var(--primary); color: white;">
+                  <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Type de Monte-Escalier</th>
+                  <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Prix Moyen 2026</th>
+                  <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Installation / Pose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Monte-escalier droit (rail standard alu, pivotement manuel)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">2 400 – 4 800 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Inclus (3h sans travaux)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Monte-escalier courbe (rail sur mesure, virage 90-180°)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">5 200 – 10 500 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Inclus (0.5 - 1 jour)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Monte-escalier extérieur (galvanisé, siège étanche)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">3 800 – 8 500 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Inclus (traité anti-corrosion)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Plateforme élévatrice PMR (fauteuil roulant, charge 250kg)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">7 000 – 13 000 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Selon configuration</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Mini-ascenseur privatif (cabine fermée, 2-3 étages)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">13 000 – 28 000 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Travaux de maçonnerie</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Monte-escalier reconditionné (révisé usine, garantie 1 an)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">1 600 – 3 200 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Occasion révisée</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Location mensuelle (tout inclus : entretien + SAV + dépannage)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">70 – 130 €/mois</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Entretien + SAV inclus</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Entretien annuel (visite technique, lubrification, batteries)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">120 – 250 €/an</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Visite préventive</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+                  <td style="padding: 16px 20px; font-weight: bold; color: var(--primary);">Démontage / reprise (désinstallation ancien + recyclage)</td>
+                  <td style="padding: 16px 20px;"><span class="price-tag">200 – 450 €</span></td>
+                  <td style="padding: 16px 20px; color: var(--text-muted);">Désinstallation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 12px;">📈 Subventions &amp; Dispositifs d'Aide à l'Accessibilité Gard (30)</h3>
+            <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+              L'adaptation d'un logement senior dans le Gard bénéficie de soutiens financiers cumulables pour réduire le reste à charge réel :
+            </p>
+            <ul style="padding-left: 20px; font-size: 15px; color: var(--text); display: flex; flex-direction: column; gap: 10px;">
+              <li><strong>MaPrimeAdapt' (Anah 2026) :</strong> Finance de 50% à 70% du montant des travaux pour les ménages aux revenus modestes à très modestes, jusqu'à un plafond de 22 000 € de travaux.</li>
+              <li><strong>Crédit d'impôt de 25% :</strong> Remboursement de 25% des dépenses d'adaptation du logement au titre de l'autonomie et du handicap (plafond de 5 000 € pour une personne seule, 10 000 € pour un couple).</li>
+              <li><strong>APA (Allocation Personnalisée d'Autonomie) :</strong> Aide versée par le Conseil Départemental du Gard (30) pour financer les travaux préconisés dans le plan d'aide personnalisé (grille AGGIR 1 à 4).</li>
+              <li><strong>TVA réduite à 5,5% :</strong> Appliquée directement sur votre facture pour l'achat et la pose d'équipements de mobilité senior par un professionnel agréé.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div>
+          <StepsForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

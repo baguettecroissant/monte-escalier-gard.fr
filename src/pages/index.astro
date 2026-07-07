@@ -1,0 +1,335 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import StepsForm from '../components/StepsForm.astro';
+import communes from '../data/communes.json';
+
+const title = "Monte-Escalier dans le Gard (30) — Solutions Autonomie & Devis Gratuits 2026";
+const description = "Trouvez un installateur agréé pour votre monte-escalier dans le Gard (30). Modèles droits, courbes, extérieurs et plateformes PMR. Devis gratuits.";
+
+// Select the top 12 cities for homepage list
+const popularCities = communes.slice(0, 12);
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    faqItems={[
+      {
+        q: "Quel est le prix moyen d'un monte-escalier dans le Gard (30) ?",
+        a: "Pour un modèle droit classique en intérieur, comptez en moyenne entre 2 400 € et 4 800 € TTC posé. Pour un modèle tournant (courbe sur mesure), le budget se situe généralement entre 5 200 € et 10 500 € TTC selon le nombre de virages, de paliers et d'étages à équiper."
+      },
+      {
+        q: "Quelles sont les aides régionales et départementales dans le 30 ?",
+        a: "Les seniors du Gard peuvent cumuler l'aide nationale MaPrimeAdapt' gérée par l'Anah (finançant 50% à 70% du montant HT), l'APA (Allocation Personnalisée d'Autonomie) versée par le Conseil Départemental du Gard (30), et un crédit d'impôt de 25% sur la part restante."
+      },
+      {
+        q: "Peut-on équiper un escalier très étroit ou escarpé ?",
+        a: "Oui, les fabricants proposent des modèles de monte-escaliers ultra-compacts avec rails monorails étroits (à partir de 12 cm de recul) et assises/repose-pieds pliables, libérant un passage de sécurité maximum (minimum 65-70 cm) pour les autres utilisateurs de l'escalier."
+      }
+    ]}
+  />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="two-column-layout">
+        <!-- Hero Left Info -->
+        <div>
+          <div class="alert-pill">
+            <div class="alert-pulse-icon"></div>
+            <span>Visite technique gratuite — devis en 24h</span>
+          </div>
+          <h1 style="color: white; font-weight: 900; font-family: var(--font-heading); line-height: 1.15; margin-bottom: 20px;">
+            Maintien à Domicile &amp; Monte-Escalier dans le Gard (30)
+          </h1>
+          <p style="color: #ECFDF5; font-size: 19px; line-height: 1.6; margin-bottom: 35px;">
+            Le Gard accueille de nombreux seniors, notamment dans ses villages typiques et zones rurales. Les mas cévenols en pierre et maisons de village à escaliers raides nécessitent souvent un aménagement PMR pour sécuriser le maintien à domicile. Retrouvez votre autonomie avec un monte-escalier électrique ergonomique conforme à la norme NF EN 81-40. Obtenez 3 devis comparatifs gratuits de nos partenaires certifiés RGE du 30.
+          </p>
+          
+          <div style="display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); padding: 12px 20px; border-radius: 12px;">
+              <span style="font-size: 20px; margin-right: 8px;">🛡️</span>
+              <strong style="color: white; font-size: 15px;">Norme NF EN 81-40 &amp; CE</strong>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.15); padding: 12px 20px; border-radius: 12px;">
+              <span style="font-size: 20px; margin-right: 8px;">🏛️</span>
+              <strong style="color: white; font-size: 15px;">Aides MaPrimeAdapt' &amp; APA 30</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Form -->
+        <div>
+          <StepsForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regional Context Section -->
+  <section style="padding: 75px 0; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">🏡 Autonomie &amp; Sécurité Senior</span>
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Pourquoi installer un monte-escalier dans le Gard ?
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Le département 30 compte une population senior importante, particulièrement en zone rurale isolée ou dans les villages cévenols. Faciliter l'accessibilité des maisons de village en pierre et des pavillons est capital pour préserver la vie à domicile de nos aînés en toute autonomie.
+        </p>
+      </div>
+
+      <div class="two-column-layout" style="align-items: stretch; gap: 40px;">
+        <!-- Left: Context cards -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="card" style="border-left: 5px solid var(--secondary); border-top: none; display: flex; gap: 15px; padding: 25px; align-items: start;">
+            <div style="font-size: 32px; line-height: 1;">👵</div>
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Maintien à domicile serein</h3>
+              <p style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                Évitez le traumatisme d'un déménagement et conservez vos habitudes dans votre mas cévenol en pierre ou votre maison de village en confiant l'accessibilité de vos niveaux à un monte-escalier silencieux.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 5px solid var(--secondary); border-top: none; display: flex; gap: 15px; padding: 25px; align-items: start;">
+            <div style="font-size: 32px; line-height: 1;">🏛️</div>
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Maisons cévenoles et escaliers étroits</h3>
+              <p style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                Les habitations traditionnelles du Gard (Nîmes, Alès, Uzès, Bagnols) possèdent fréquemment des escaliers en pierre très raides et étroits. Nos modèles sur mesure s'adaptent dès 65 cm de passage utile.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 5px solid var(--secondary); border-top: none; display: flex; gap: 15px; padding: 25px; align-items: start;">
+            <div style="font-size: 32px; line-height: 1;">💶</div>
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Aides MaPrimeAdapt' &amp; APA 30</h3>
+              <p style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                L'Anah finance jusqu'à 70% HT de vos travaux d'adaptation pour les ménages aux revenus modestes. Le Conseil Départemental 30 complète via l'APA pour réduire votre reste à charge.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Illustrative image -->
+        <div style="border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+          <img 
+            src="/images/hero-monte-escalier-gard.png" 
+            alt="Senior utilisant un monte-escalier moderne dans une maison cévenole en pierre" 
+            style="width: 100%; height: 100%; object-fit: cover; min-height: 380px;" 
+            loading="lazy"
+          />
+          <div style="padding: 15px 20px; background: white; border-top: 2px solid var(--border-color); font-size: 14px; color: var(--text-muted); font-family: var(--font-mono);">
+            🏛️ Maison de village gardoise en pierre avec installation d'un monte-escalier courbe discret.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Guide Section -->
+  <section style="padding: 75px 0; background-color: var(--primary-light); border-top: 1.5px solid var(--border-color); border-bottom: 1.5px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Monte-Escalier Droit vs Monte-Escalier Courbe : Quel Modèle Choisir ?
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted);">
+          Une solution standard rapide à poser ou une conception 100% sur mesure pour s'adapter à votre habitation.
+        </p>
+      </div>
+
+      <div class="two-column-layout" style="gap: 40px; align-items: stretch;">
+        <!-- Droit -->
+        <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 200px; background: linear-gradient(135deg, var(--primary-light) 0%, #a7f3d0 100%); display: flex; align-items: center; justify-content: center; font-size: 72px; border-bottom: 2px solid var(--border-color);">
+            📏
+          </div>
+          <div style="padding: 30px; display: flex; flex-direction: column; height: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <h3 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin: 0;">Le Monte-Escalier Droit</h3>
+              <span class="badge-pill" style="background: var(--primary-light); color: var(--primary); margin: 0; font-size: 12px;">Le Standard Rectiligne</span>
+            </div>
+            <p style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+              Destiné aux escaliers sans aucun virage, changement de pente ou palier intermédiaire. Le rail en aluminium robuste est fixé directement sur les marches (sans abîmer les murs) en seulement 2 à 4 heures de travail.
+            </p>
+            <ul style="padding-left: 20px; font-size: 15px; color: var(--text); display: flex; flex-direction: column; gap: 8px; margin: 0;">
+              <li><strong>Rapport qualité-prix :</strong> La solution la plus économique à l'achat et à la pose.</li>
+              <li><strong>Installation express :</strong> Matériel standard disponible rapidement et posé en une demi-journée.</li>
+              <li><strong>Encombrement minimal :</strong> Modèles pliables laissant l'escalier libre pour les aidants.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Courbe -->
+        <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 200px; background: linear-gradient(135deg, #FEE2E2 0%, #FCA5A5 100%); display: flex; align-items: center; justify-content: center; font-size: 72px; border-bottom: 2px solid var(--border-color);">
+            🌀
+          </div>
+          <div style="padding: 30px; display: flex; flex-direction: column; height: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <h3 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin: 0;">Le Monte-Escalier Courbe</h3>
+              <span class="badge-pill" style="background: #FEE2E2; color: var(--secondary); border-color: var(--secondary); margin: 0; font-size: 12px;">Conception sur Mesure</span>
+            </div>
+            <p style="font-size: 16px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+              Indispensable si votre escalier comporte des quarts-tournants, des paliers de repos ou s'il est de type hélicoïdal (colimaçon). Conçu sur mesure après relevé 3D précis des dimensions de votre escalier en pierre cévenole.
+            </p>
+            <ul style="padding-left: 20px; font-size: 15px; color: var(--text); display: flex; flex-direction: column; gap: 8px; margin: 0;">
+              <li><strong>Parfaite adaptation :</strong> Suit les courbes intérieures ou extérieures au plus près de la rampe.</li>
+              <li><strong>Sécurité maximale :</strong> Siège pivotant électrique pour s'asseoir sans faire face au vide.</li>
+              <li><strong>Intégration esthétique :</strong> Coloris de rails et tissus personnalisables assortis à votre déco.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Budget Estimator Section -->
+  <section style="padding: 75px 0; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 800px;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">🧮 Estimateur de Budget Virtuel</span>
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Estimer le Prix Moyen d'un Monte-Escalier (30)
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted);">
+          Sélectionnez le type d'escalier et les options souhaitées pour simuler le budget de votre projet.
+        </p>
+      </div>
+
+      <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 35px; box-shadow: var(--shadow-lg);">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Field 1: Work Type -->
+          <div class="form-group">
+            <label style="font-family: var(--font-heading); font-weight: bold; font-size: 18px;">Configuration de l'escalier :</label>
+            <select id="estimator-type" class="form-control" style="background: white; font-weight: bold; font-size: 16px;">
+              <option value="droit">📏 Monte-escalier droit (rectiligne intérieur)</option>
+              <option value="courbe1">🌀 Monte-escalier courbe (1 virage sur mesure)</option>
+              <option value="courbe2">🌀 Monte-escalier courbe complexe (multi-niveaux / paliers)</option>
+              <option value="exterieur">☀️ Monte-escalier extérieur (étanche &amp; traité anti-UV)</option>
+            </select>
+          </div>
+
+          <!-- Field 2: Options -->
+          <div class="form-group">
+            <label style="font-family: var(--font-heading); font-weight: bold; font-size: 18px;">Niveau de confort &amp; d'options :</label>
+            <div style="display: flex; gap: 20px; margin-top: 5px; flex-direction: column;">
+              <label style="font-size: 16px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="estimator-option" value="1.0" checked style="accent-color: var(--secondary); transform: scale(1.2);" /> Standard (pivotement manuel, coloris standard)
+              </label>
+              <label style="font-size: 16px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="estimator-option" value="1.15" style="accent-color: var(--secondary); transform: scale(1.2);" /> Premium (siège pivotant motorisé, rail coulissant automatique, coloris de luxe)
+              </label>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <hr style="border: 0; border-top: 1.5px solid var(--border-color); margin: 10px 0;" />
+
+          <!-- Output Pricing Box -->
+          <div style="background: var(--primary-light); border: 2px dashed var(--border-color); padding: 25px; border-radius: var(--radius-sm); display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div style="font-size: 15px; color: var(--primary); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Estimation budgétaire 2026 :</div>
+            <div style="font-size: 34px; font-weight: 900; color: var(--secondary); font-family: var(--font-mono);" id="estimator-result">
+              2 400 € – 4 800 €
+            </div>
+            <p style="font-size: 14px; color: var(--text-muted); text-align: center; margin: 0;">
+              Cette simulation comprend la fourniture, la livraison et l'installation par un professionnel agréé dans le Gard. Reste à charge à calculer après déduction des aides ANAH / APA.
+            </p>
+          </div>
+
+          <div style="text-align: center; margin-top: 10px;">
+            <a href="#devis" class="btn-primary" style="display: inline-block;">📋 Recevoir mes 3 Devis sur Mesure &amp; Gratuits &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Cities Link Directory -->
+  <section style="padding: 75px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">🗺️ Interventions Locales</span>
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary);">
+          Villes principales d'intervention dans le Gard
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted); margin-top: 10px;">
+          Retrouvez nos techniciens partenaires actifs sur votre commune de résidence du 30.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+        {popularCities.map((c) => (
+          <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+            <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 12px;">
+              🏰 {c.nom} ({c.codePostal})
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px;">
+              <a href={`/monte-escalier-${c.slug}/`} style="color: var(--primary); font-weight: bold;">♿ Installation &amp; Devis &rarr;</a>
+              <a href={`/installateur-monte-escalier-${c.slug}/`} style="color: var(--primary); font-weight: bold;">👤 Installateurs Agréés &rarr;</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="/communes/" class="btn-secondary" style="display: inline-block;">🗺️ Voir toutes les communes du 30 &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estimator Script logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const typeSelect = document.getElementById('estimator-type') as HTMLSelectElement;
+      const optionRadios = document.getElementsByName('estimator-option') as NodeListOf<HTMLInputElement>;
+      const resultDiv = document.getElementById('estimator-result');
+
+      const calculate = () => {
+        if (!typeSelect || !resultDiv) return;
+
+        const type = typeSelect.value;
+        let factor = 1.0;
+        for (const radio of optionRadios) {
+          if (radio.checked) {
+            factor = parseFloat(radio.value);
+            break;
+          }
+        }
+
+        let baseMin = 2400;
+        let baseMax = 4800;
+
+        if (type === 'courbe1') {
+          baseMin = 5200;
+          baseMax = 8000;
+        } else if (type === 'courbe2') {
+          baseMin = 8000;
+          baseMax = 10500;
+        } else if (type === 'exterieur') {
+          baseMin = 3800;
+          baseMax = 8500;
+        }
+
+        const finalMin = Math.round(baseMin * factor);
+        const finalMax = Math.round(baseMax * factor);
+
+        resultDiv.textContent = `${finalMin.toLocaleString('fr-FR')} € – ${finalMax.toLocaleString('fr-FR')} €`;
+      };
+
+      if (typeSelect) {
+        typeSelect.addEventListener('change', calculate);
+      }
+      optionRadios.forEach(radio => {
+        radio.addEventListener('change', calculate);
+      });
+    });
+  </script>
+</Layout>

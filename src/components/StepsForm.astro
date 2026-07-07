@@ -1,0 +1,468 @@
+---
+import config from '../data/config.json';
+
+interface Props {
+  initialZip?: string;
+  initialCommune?: string;
+}
+
+const { initialZip = "", initialCommune = "" } = Astro.props;
+---
+
+<div class="form-card" id="devis">
+  <h2>Estimez votre budget monte-escalier &amp; recevez vos devis</h2>
+  <p class="subtitle">Installateurs agréés du Gard - Tarifs et aides 2026</p>
+
+  <form id="borne-lead-form">
+    <!-- Step 1: Type de monte-escalier -->
+    <div class="step-container" id="step-1">
+      <div class="form-group">
+        <label>1. Quel type de monte-escalier recherchez-vous ?</label>
+        <div class="options-grid">
+          <div class="option-box active" data-value="Droit" data-step="1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+            </svg>
+            <span>Monte-escalier droit</span>
+            <span class="desc-text">Pour escalier rectiligne sans virage ni palier</span>
+          </div>
+          <div class="option-box" data-value="Courbe" data-step="1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8.89M9 11l3 3L22 4" />
+            </svg>
+            <span>Monte-escalier courbe</span>
+            <span class="desc-text">Pour escalier tournant, en colimaçon ou avec paliers</span>
+          </div>
+          <div class="option-box" data-value="Exterieur" data-step="1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span>Monte-escalier extérieur</span>
+            <span class="desc-text">Pour accéder à votre terrasse, jardin ou perron</span>
+          </div>
+          <div class="option-box" data-value="Plateforme PMR" data-step="1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            <span>Plateforme PMR / Autre</span>
+            <span class="desc-text">Plateforme élévatrice pour fauteuil roulant</span>
+          </div>
+        </div>
+        <input type="hidden" name="type_escalier" id="type_escalier" value="Droit" />
+        <input type="hidden" name="cat_id" id="cat_id" value="144" />
+      </div>
+      <div class="form-nav">
+        <button type="button" class="btn-primary next-btn" data-next="2" style="width: 100%;">Continuer &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Habitation & Statut -->
+    <div class="step-container" id="step-2" style="display: none;">
+      <div class="form-group">
+        <label>2. Quel est le type de bâtiment ?</label>
+        <div class="options-grid-row">
+          <div class="option-box-small active" data-value="1" data-field="type_bien" data-step="2">
+            <span>🏡 Maison / Villa / Mas</span>
+          </div>
+          <div class="option-box-small" data-value="2" data-field="type_bien" data-step="2">
+            <span>🏢 Appartement / Duplex</span>
+          </div>
+        </div>
+        <input type="hidden" name="type_bien" id="type_bien" value="1" />
+      </div>
+
+      <div class="form-group" style="margin-top: 25px;">
+        <label>Quel est votre statut d'occupation ?</label>
+        <div class="options-grid-row">
+          <div class="option-box-small active" data-value="1" data-field="situation" data-step="2b">
+            <span>Propriétaire</span>
+          </div>
+          <div class="option-box-small" data-value="2" data-field="situation" data-step="2b">
+            <span>Locataire</span>
+          </div>
+        </div>
+        <input type="hidden" name="situation" id="situation" value="1" />
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn-secondary prev-btn" data-prev="1">&larr; Retour</button>
+        <button type="button" class="btn-primary next-btn" data-next="3">Continuer &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Configuration de l'escalier & Étages -->
+    <div class="step-container" id="step-3" style="display: none;">
+      <div class="form-group">
+        <label>3. Quel est le matériau de votre escalier ?</label>
+        <div class="options-grid">
+          <div class="option-box active" data-value="Bois" data-step="3">
+            <span>⚡ Escalier en bois</span>
+            <span class="desc-text">Idéal pour les intérieurs classiques</span>
+          </div>
+          <div class="option-box" data-value="Beton / Pierre" data-step="3">
+            <span>⚡ Béton / Pierre / Granit / Schiste</span>
+            <span class="desc-text">Très répandu dans les mas cévenols et villages</span>
+          </div>
+          <div class="option-box" data-value="Metal" data-step="3">
+            <span>⚡ Métallique / Synthétique</span>
+            <span class="desc-text">Pour les structures modernes ou extérieures</span>
+          </div>
+          <div class="option-box" data-value="Autre" data-step="3">
+            <span>⚡ Autre</span>
+            <span class="desc-text">Matériaux mixtes ou configuration spéciale</span>
+          </div>
+        </div>
+        <input type="hidden" name="escalier_matiere" id="escalier_matiere" value="Bois" />
+      </div>
+
+      <div class="form-group" style="margin-top: 25px;">
+        <label>Combien d'étages le monte-escalier doit-il franchir ?</label>
+        <div class="options-grid-row">
+          <div class="option-box-small active" data-value="1" data-field="escalier_etages" data-step="3b">
+            <span>1 étage</span>
+          </div>
+          <div class="option-box-small" data-value="2" data-field="escalier_etages" data-step="3b">
+            <span>2 étages</span>
+          </div>
+          <div class="option-box-small" data-value="3+" data-field="escalier_etages" data-step="3b">
+            <span>3 étages ou plus</span>
+          </div>
+        </div>
+        <input type="hidden" name="escalier_etages" id="escalier_etages" value="1" />
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn-secondary prev-btn" data-prev="2">&larr; Retour</button>
+        <button type="button" class="btn-primary next-btn" data-next="4">Continuer &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Localisation & Délai -->
+    <div class="step-container" id="step-4" style="display: none;">
+      <div class="form-group">
+        <label for="postal_code">4. Code postal du chantier (Gard uniquement)</label>
+        <input type="text" id="postal_code" name="postal_code" placeholder="Ex: 30000" class="form-control" required pattern="^30[0-9]{3}$" maxlength="5" value={initialZip} />
+        <span class="input-tip">Doit commencer par 30 (ex : 30000 Nîmes, 30100 Alès, 30200 Bagnols-sur-Cèze, 30300 Beaucaire, 30700 Uzès)</span>
+      </div>
+
+      <!-- Auto resolved city display -->
+      <div class="form-group" id="ville-group" style="display: none;">
+        <label for="ville_chantier">Ville du projet</label>
+        <input type="text" id="ville_chantier" name="ville_chantier" class="form-control" placeholder="Sélectionnez votre ville" required value={initialCommune} />
+      </div>
+
+      <div class="form-group" style="margin-top: 25px;">
+        <label>Délai souhaité pour votre installation</label>
+        <div class="options-grid-row">
+          <div class="option-box-small active" data-value="1" data-field="delais" data-step="4b">
+            <span>⚡ Urgent / Maintien d'urgence</span>
+          </div>
+          <div class="option-box-small" data-value="2" data-field="delais" data-step="4b">
+            <span>📅 - de 3 mois</span>
+          </div>
+          <div class="option-box-small" data-value="4" data-field="delais" data-step="4b">
+            <span>⏳ + de 3 mois</span>
+          </div>
+        </div>
+        <input type="hidden" name="delais" id="delais" value="1" />
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn-secondary prev-btn" data-prev="3">&larr; Retour</button>
+        <button type="button" class="btn-primary next-btn" data-next="5">Continuer &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Coordonnées de contact -->
+    <div class="step-container" id="step-5" style="display: none;">
+      <div class="form-group-row">
+        <div class="form-group">
+          <label for="prenom">Votre Prénom</label>
+          <input type="text" id="prenom" name="prenom" placeholder="Jean" class="form-control" required minlength="2" />
+        </div>
+        <div class="form-group">
+          <label for="nom">Votre Nom</label>
+          <input type="text" id="nom" name="nom" placeholder="Duval" class="form-control" required minlength="2" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone (validation requise)</label>
+        <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78" class="form-control" required pattern="^(06|07)[0-9]{8}$" maxlength="10" />
+        <span class="input-tip">Un conseiller technique valide avec vous votre projet par téléphone.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" name="email" placeholder="jean.duval@gmail.com" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="adresse">Adresse complète de l'installation</label>
+        <input type="text" id="adresse" name="adresse" placeholder="12 Avenue Jean Jaurès" class="form-control" required minlength="5" />
+      </div>
+
+      <!-- Errors alert wrapper -->
+      <div id="form-errors" class="alert-danger" style="display: none; margin-top: 15px;"></div>
+
+      <div class="form-nav">
+        <button type="button" class="btn-secondary prev-btn" data-prev="4">&larr; Retour</button>
+        <button type="submit" class="btn-primary submit-btn" style="color: white; border: none; width: auto; flex: 1;">🔥 Envoyer ma demande &rarr;</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="form-submitting" style="display: none; text-align: center; padding: 40px 0;">
+    <div class="spinner-loader"></div>
+    <h3 style="font-size: 20px; font-weight: 800; color: var(--primary); margin-top: 20px;">Vérification technique...</h3>
+    <p style="color: var(--text-muted); font-size: 16px; margin-top: 8px;">Recherche d'installateurs de monte-escalier agréés disponibles dans votre secteur gardois.</p>
+  </div>
+</div>
+
+<style>
+  .options-grid-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  .option-box-small {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    background: #fff;
+    color: var(--primary);
+    transition: var(--transition);
+  }
+  .option-box-small:hover {
+    border-color: var(--secondary);
+    background: var(--primary-light);
+  }
+  .option-box-small.active {
+    border-color: var(--secondary);
+    background: #FEE2E2;
+    color: var(--primary);
+    box-shadow: 0 0 0 1px var(--secondary);
+  }
+  .desc-text {
+    font-size: 13px;
+    font-weight: normal;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: block;
+  }
+  .input-tip {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
+  }
+  .form-group-row {
+    display: flex;
+    gap: 15px;
+  }
+  .form-group-row .form-group {
+    flex: 1;
+  }
+  .alert-danger {
+    background: #fff5f5;
+    border: 2px solid #feb2b2;
+    color: #9b2c2c;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  import communes from '../data/communes.json';
+
+  const nextBtns = document.querySelectorAll('.next-btn');
+  const prevBtns = document.querySelectorAll('.prev-btn');
+  const form = document.getElementById('borne-lead-form');
+  const formSubmitting = document.getElementById('form-submitting');
+  const formErrors = document.getElementById('form-errors');
+  const pcInput = document.getElementById('postal_code') as HTMLInputElement;
+  const villeGroup = document.getElementById('ville-group');
+  const villeInput = document.getElementById('ville_chantier') as HTMLInputElement;
+
+  // Handle Box Option Clicks (Step 1 & Step 3)
+  document.querySelectorAll('.option-box').forEach(box => {
+    box.addEventListener('click', () => {
+      const step = box.getAttribute('data-step');
+      const value = box.getAttribute('data-value');
+      
+      document.querySelectorAll(`.option-box[data-step="${step}"]`).forEach(b => {
+        b.classList.remove('active');
+      });
+      
+      box.classList.add('active');
+      
+      if (step === '1') {
+        const inputType = document.getElementById('type_escalier') as HTMLInputElement;
+        if (inputType) inputType.value = value || '';
+      } else if (step === '3') {
+        const inputMatiere = document.getElementById('escalier_matiere') as HTMLInputElement;
+        if (inputMatiere) inputMatiere.value = value || '';
+      }
+    });
+  });
+
+  // Handle Small Box Row clicks (Step 2, 2b, 3b, 4b)
+  document.querySelectorAll('.option-box-small').forEach(box => {
+    box.addEventListener('click', () => {
+      const step = box.getAttribute('data-step');
+      const value = box.getAttribute('data-value');
+      const field = box.getAttribute('data-field');
+      
+      document.querySelectorAll(`.option-box-small[data-step="${step}"]`).forEach(b => {
+        b.classList.remove('active');
+      });
+      box.classList.add('active');
+      
+      const hiddenInput = document.getElementById(field || '') as HTMLInputElement;
+      if (hiddenInput) {
+        hiddenInput.value = value || '';
+      }
+    });
+  });
+
+  // Auto-resolve city name from codePostal (30 prefix)
+  const resolveCity = () => {
+    if (!pcInput) return;
+    const cpVal = pcInput.value.trim();
+    if (/^30\d{3}$/.test(cpVal)) {
+      const found = communes.find(c => c.codePostal === cpVal);
+      if (found) {
+        villeInput.value = found.nom;
+        if (villeGroup) villeGroup.style.display = 'block';
+        villeInput.readOnly = true;
+      } else {
+        if (villeGroup) villeGroup.style.display = 'block';
+        villeInput.value = '';
+        villeInput.readOnly = false;
+      }
+    } else {
+      if (villeGroup) villeGroup.style.display = 'none';
+      villeInput.value = '';
+    }
+  };
+
+  if (pcInput) {
+    pcInput.addEventListener('input', resolveCity);
+    if (pcInput.value) {
+      resolveCity();
+    }
+  }
+
+  // Next Step Navigation
+  nextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nextStepId = btn.getAttribute('data-next');
+      const currentStep = btn.closest('.step-container') as HTMLElement;
+      
+      if (nextStepId === '5') {
+        const cpVal = pcInput.value.trim();
+        if (!/^30\d{3}$/.test(cpVal)) {
+          alert('Veuillez entrer un code postal du Gard valide (commençant par 30).');
+          return;
+        }
+        if (!villeInput.value.trim()) {
+          alert('Veuillez spécifier la ville.');
+          return;
+        }
+      }
+
+      if (currentStep) currentStep.style.display = 'none';
+      const targetStep = document.getElementById(`step-${nextStepId}`);
+      if (targetStep) targetStep.style.display = 'block';
+    });
+  });
+
+  // Previous Step Navigation
+  prevBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const prevStepId = btn.getAttribute('data-prev');
+      const currentStep = btn.closest('.step-container') as HTMLElement;
+      
+      if (currentStep) currentStep.style.display = 'none';
+      const targetStep = document.getElementById(`step-${prevStepId}`);
+      if (targetStep) targetStep.style.display = 'block';
+    });
+  });
+
+  // Form Submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (formErrors) {
+      formErrors.style.display = 'none';
+      formErrors.innerHTML = '';
+    }
+
+    const formData = new FormData(form as HTMLFormElement);
+    const catIdVal = Number((document.getElementById('cat_id') as HTMLInputElement)?.value || 144);
+    
+    const typeBienLabel = (document.getElementById('type_bien') as HTMLInputElement)?.value === '1' ? 'Maison' : 'Appartement';
+    const statusLabel = (document.getElementById('situation') as HTMLInputElement)?.value === '1' ? 'Propriétaire' : 'Locataire';
+    const typeEscalierLabel = (document.getElementById('type_escalier') as HTMLInputElement)?.value || 'Droit';
+    const matiereLabel = (document.getElementById('escalier_matiere') as HTMLInputElement)?.value || 'Bois';
+    const etagesLabel = (document.getElementById('escalier_etages') as HTMLInputElement)?.value || '1';
+    
+    const etagesText = etagesLabel === '1' ? '1 étage' : etagesLabel === '2' ? '2 étages' : '3 étages ou plus';
+
+    const payload = {
+      nom: (formData.get('nom') as string || '').trim(),
+      prenom: (formData.get('prenom') as string || '').trim(),
+      email: (formData.get('email') as string || '').trim(),
+      tel: (formData.get('phone') as string || '').trim(),
+      adresse: (formData.get('adresse') as string || '').trim(),
+      cp: (formData.get('postal_code') as string || '').trim(),
+      ville: (formData.get('ville_chantier') as string || '').trim(),
+      catId: catIdVal,
+      typeBien: (document.getElementById('type_bien') as HTMLInputElement)?.value || '1',
+      situation: (document.getElementById('situation') as HTMLInputElement)?.value || '1',
+      chauffageActuel: `Monte-escalier: ${typeEscalierLabel}, Escalier: ${matiereLabel}, Hauteur: ${etagesText}, Statut: ${statusLabel}`,
+      delais: (document.getElementById('delais') as HTMLInputElement)?.value || '2',
+      pageUrl: window.location.href
+    };
+
+    const step5 = document.getElementById('step-5') as HTMLElement;
+    if (step5) step5.style.display = 'none';
+    if (formSubmitting) formSubmitting.style.display = 'block';
+
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.errors?.join('<br/>') || 'Une erreur est survenue lors de la soumission de votre projet.');
+      }
+
+      window.location.href = `/confirmation?devis_id=${data.devis_id}&devis_hash=${data.devis_hash}&prenom=${encodeURIComponent(payload.prenom)}&ville=${encodeURIComponent(payload.ville)}&cat=${payload.catId}`;
+
+    } catch (err: any) {
+      console.error(err);
+      
+      if (formSubmitting) formSubmitting.style.display = 'none';
+      if (step5) step5.style.display = 'block';
+      
+      if (formErrors) {
+        formErrors.style.display = 'block';
+        formErrors.innerHTML = err.message || 'Une erreur est survenue lors de l\'envoi du devis. Veuillez réessayer.';
+      }
+    }
+  });
+</script>

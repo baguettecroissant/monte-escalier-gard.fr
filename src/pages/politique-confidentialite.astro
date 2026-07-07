@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import config from '../data/config.json';
+
+const title = `Politique de Confidentialité | ${config.brandName}`;
+const description = `Politique de protection des données personnelles (RGPD) pour le site ${config.domain}.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Politique de Confidentialité" }
+];
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container" style="max-width: 800px; font-size: 18px; line-height: 1.6; color: var(--text);">
+      <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 25px;">
+        Politique de Confidentialité
+      </h1>
+
+      <p style="margin-bottom: 15px;">
+        La protection de vos données personnelles est au cœur de nos engagements. Cette politique décrit comment le site <strong>{config.domain}</strong> collecte, stocke et traite les données personnelles des utilisateurs qui font une demande de devis en ligne.
+      </p>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">1. Données collectées</h2>
+      <p style="margin-bottom: 15px;">
+        Lorsque vous utilisez notre formulaire d'estimation de devis en ligne, nous collectons les données suivantes :
+      </p>
+      <ul style="margin-left: 20px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 8px;">
+        <li>Nom et prénom</li>
+        <li>Adresse e-mail</li>
+        <li>Numéro de téléphone (fixe ou mobile)</li>
+        <li>Adresse complète de l'installation (rue, code postal, ville)</li>
+        <li>Informations descriptives du projet d'accessibilité (type de monte-escalier, matériau de l'escalier, nombre d'étages)</li>
+      </ul>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">2. Utilisation et transmission des données</h2>
+      <p style="margin-bottom: 15px;">
+        Vos données sont collectées dans le but exclusif de traiter votre demande de devis et de vous mettre en relation avec des installateurs agréés actifs dans le Gard.
+      </p>
+      <p style="margin-bottom: 15px;">
+        Dans le cadre de l'architecture dual-write du site, vos données sont sauvegardées de façon sécurisée dans notre base de données Supabase, puis transmises à notre partenaire technologique <strong>ViteUnDevis</strong> qui se charge d'identifier et de mandater les experts en accessibilité disponibles près de chez vous dans le 30.
+      </p>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">3. Durée de conservation</h2>
+      <p style="margin-bottom: 15px;">
+        Les données des prospects sont conservées pour une durée maximale de 36 mois à compter de la soumission du formulaire, ou jusqu'à ce que l'utilisateur exerce son droit de retrait.
+      </p>
+
+      <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 12px;">4. Vos droits (RGPD)</h2>
+      <p style="margin-bottom: 15px;">
+        Conformément à la réglementation européenne sur la protection des données personnelles (RGPD), vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression de vos données personnelles. Vous pouvez exercer ce droit à tout moment en envoyant un e-mail à : <strong>contact@baguettecroissant.com</strong>.
+      </p>
+    </div>
+  </section>
+</Layout>

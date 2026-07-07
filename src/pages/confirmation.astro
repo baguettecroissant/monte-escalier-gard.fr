@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const title = "Votre demande de devis monte-escalier a bien été reçue !";
+const description = "Demande validée. Un conseiller technique du Gard (30) va prendre contact avec vous par téléphone pour chiffrer votre projet.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Confirmation de demande" }
+];
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 70px 0 100px; background-color: var(--card-bg); text-align: center;">
+    <div class="container" style="max-width: 650px;">
+      <div style="font-size: 64px; margin-bottom: 20px;">✅</div>
+      
+      <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+        Merci <span id="client-name"></span> ! Votre demande est validée.
+      </h1>
+      
+      <p style="font-size: 18px; color: var(--text); line-height: 1.6; margin-bottom: 30px;">
+        Votre dossier a été enregistré avec succès pour la commune de <strong id="chantier-ville">votre ville</strong>. 
+        Un conseiller technique va vous recontacter par téléphone au numéro fourni sous 24h à 48h afin de valider les détails techniques de votre projet et organiser une étude de faisabilité gratuite dans le Gard (30).
+      </p>
+
+      <div style="background: var(--primary-light); border: 2px solid var(--border-color); padding: 20px; border-radius: var(--radius-md); margin-bottom: 35px; font-family: var(--font-mono); font-size: 15px; color: var(--primary); text-align: left;">
+        <div style="margin-bottom: 8px;"><strong>Référence Projet :</strong> <span id="devis-id-display">#---</span></div>
+        <div style="margin-bottom: 8px;"><strong>Catégorie :</strong> <span id="devis-cat-display">Chargement...</span></div>
+        <div><strong>Statut du dossier :</strong> <span style="color: var(--secondary); font-weight: bold;">Validation téléphonique requise</span></div>
+      </div>
+
+      <a href="/" class="btn-primary" style="display: inline-block;">Retour à l'accueil</a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const devisId = params.get('devis_id') || 'En cours';
+    const prenom = params.get('prenom') || 'client';
+    const ville = params.get('ville') || '';
+    const cat = params.get('cat') || '';
+
+    // Set values in DOM
+    const nameSpan = document.getElementById('client-name');
+    if (nameSpan) nameSpan.textContent = prenom;
+
+    const villeStrong = document.getElementById('chantier-ville');
+    if (villeStrong) villeStrong.textContent = ville || 'votre ville';
+
+    const idSpan = document.getElementById('devis-id-display');
+    if (idSpan) idSpan.textContent = `#${devisId}`;
+
+    const catSpan = document.getElementById('devis-cat-display');
+    if (catSpan) {
+      const catNames: Record<string, string> = {
+        '144': 'Installation de Monte-escalier / Plateforme PMR'
+      };
+      catSpan.textContent = catNames[cat] || 'Installation de Monte-escalier';
+    }
+  });
+</script>

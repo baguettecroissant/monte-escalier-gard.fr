@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Exclude non-money and parameter-filled pages to optimize crawl budget
+Disallow: /confirmation
+Disallow: /mentions-legales
+Disallow: /politique-confidentialite
+
+# Sitemap URL
+Sitemap: https://monte-escalier-gard.fr/sitemap-index.xml

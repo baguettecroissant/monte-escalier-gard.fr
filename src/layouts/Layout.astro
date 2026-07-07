@@ -1,0 +1,233 @@
+---
+import config from '../data/config.json';
+import '../styles/global.css';
+import communes from '../data/communes.json';
+import ExitIntentPopup from '../components/ExitIntentPopup.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  robots?: string;
+}
+
+const { 
+  title = `${config.brandName} | Installation & Devis Gratuits Gard (30)`, 
+  description = "Trouvez un installateur de monte-escalier agréé dans le Gard (30). Modèles droits, courbes, extérieurs et plateformes PMR. Devis gratuits.",
+  canonicalUrl,
+  robots = 'index, follow'
+} = Astro.props;
+
+const siteUrl = `https://${config.domain}`;
+
+// Auto-generate canonical URL
+let resolvedPathname = Astro.url.pathname;
+if (!resolvedPathname.endsWith('/')) {
+  resolvedPathname += '/';
+}
+const resolvedCanonical = canonicalUrl || `${siteUrl}${resolvedPathname}`;
+
+// Top 10 communes for footer
+const topFooterCommunes = communes.slice(0, 10);
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content={robots} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Favicon & Styles -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={resolvedCanonical} />
+    <link rel="alternate" hreflang="fr" href={resolvedCanonical} />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={config.brandName} />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content={`${siteUrl}/images/hero-monte-escalier-gard.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/images/hero-monte-escalier-gard.png`} />
+
+    <!-- Local SEO -->
+    <meta name="geo.region" content="FR-30" />
+    <meta name="geo.placename" content={config.mainCity} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-inner">
+        <a href="/" class="logo" id="main-logo-link">
+          <span>🏛️</span> Monte-Escalier <span class="hide-mobile-inline">Gard (30)</span>
+        </a>
+        <nav class="header-nav" aria-label="Navigation principale" id="main-nav-bar">
+          <a href="/" id="nav-home">Accueil</a>
+          <a href="/tarifs/" id="nav-tarifs">🧮 Tarifs 2026</a>
+          <a href="/guide-aides-monte-escalier-30/" id="nav-aides">💶 Aides Gard (30)</a>
+          <a href="/monte-escalier-maison-cevenole/" id="nav-cevenole">⛰️ Maison Cévenole</a>
+          <a href="/communes/" id="nav-communes">Villes (30)</a>
+        </nav>
+        <div class="header-actions">
+          <a href="/devis/" class="contact-btn heartbeat-btn" id="header-cta-quote">
+            📋 Devis<span class="hide-mobile-text"> Gratuit</span>
+          </a>
+          <button class="mobile-menu-toggle" id="menu-toggle-btn" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <h3>🏛️ {config.brandName}</h3>
+          <p style="margin-top: 15px; font-size: 15px; line-height: 1.6; color: #a8a29e;">
+            Votre service indépendant d'information et de mise en relation pour l'installation de monte-escaliers dans le Gard ({config.departmentCode}). 
+            Nous vous aidons à équiper votre villa, maison cévenole ou appartement du Gard d'un système de mobilité sécurisé (droit, tournant sur mesure, extérieur) pour préserver le maintien à domicile. Obtenez gratuitement et sans engagement jusqu'à 3 devis comparatifs auprès d'installateurs qualifiés du 30.
+          </p>
+          <p style="margin-top: 15px; font-size: 16px; font-weight: bold; color: white;">
+            📞 Numéro Vert Conseils : <span style="color: var(--accent); font-family: var(--font-mono);">0800 94 54 83</span> (Appel gratuit)
+          </p>
+        </div>
+        
+        <div class="footer-links">
+          <h3 style="font-size: 18px; text-transform: uppercase; color: white;">Villes Populaires</h3>
+          <ul style="margin-top: 15px; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+            {topFooterCommunes.map((c) => (
+              <li style="font-size: 15px;">
+                <a href={`/monte-escalier-${c.slug}/`} style="font-weight: 700; color: var(--accent);">{c.nom}</a>
+                <span style="font-size: 13px; color: #78716c; margin-left: 6px;">
+                  (<a href={`/installateur-monte-escalier-${c.slug}/`} style="color: #60a5fa; text-decoration: none;" title={`Installateur ${c.nom}`}>installateur</a>)
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h3 style="font-size: 18px; text-transform: uppercase; color: white;">Dossiers &amp; Guides</h3>
+          <ul style="margin-top: 15px; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="/tarifs/">Grille de Tarifs Monte-Escalier 2026</a></li>
+            <li><a href="/guide-aides-monte-escalier-30/">Aides &amp; Financement (APA 30, ANAH)</a></li>
+            <li><a href="/monte-escalier-maison-cevenole/">Guide Maisons Cévenoles</a></li>
+            <li><a href="/devis/">Demander un Devis Gratuit</a></li>
+            <li><a href="/communes/">Index de toutes les Communes</a></li>
+          </ul>
+          
+          <h3 style="font-size: 18px; text-transform: uppercase; color: white; margin-top: 25px;">Articles Récents</h3>
+          <ul style="margin-top: 10px; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+            <li><a href="/guides/prix-monte-escalier-gard-30-2026/">Prix Monte-Escalier Gard &amp; 30</a></li>
+            <li><a href="/guides/guide-aides-monte-escalier-30/">Aides Départementales (30)</a></li>
+            <li><a href="/guides/monte-escalier-maison-cevenole/">Escaliers Maison Cévenole en Pierre</a></li>
+            <li><a href="/guides/installateur-monte-escalier-certifie-gard/">Choisir son Installateur (30)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="container footer-bottom">
+        <p style="color: #78716c;">&copy; {new Date().getFullYear()} {config.brandName}. Tous droits réservés.</p>
+        <p style="margin-top: 10px;">
+          <a href="/mentions-legales/" id="footer-link-legal" style="color: #78716c; font-size: 14px; margin-right: 15px;">Mentions Légales</a>
+          <a href="/politique-confidentialite/" id="footer-link-privacy" style="color: #78716c; font-size: 14px;">Politique de Confidentialité</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Exit Intent Popup -->
+    <ExitIntentPopup />
+
+    <script>
+      // Smooth scroll to devis form if present on same page
+      document.querySelectorAll('a[href="/devis/"], a[href="#devis"], .contact-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const targetForm = document.getElementById('devis');
+          if (targetForm) {
+            e.preventDefault();
+            targetForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetForm.classList.add('pulse-form');
+            setTimeout(() => {
+              targetForm.classList.remove('pulse-form');
+            }, 3000);
+
+            const firstBox = targetForm.querySelector('.option-box') as HTMLElement;
+            if (firstBox) {
+              firstBox.focus();
+              firstBox.style.outline = '3px solid var(--secondary)';
+              setTimeout(() => {
+                if (firstBox) firstBox.style.outline = '';
+              }, 3000);
+            }
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const menuToggleBtn = document.getElementById('menu-toggle-btn');
+      const headerNav = document.getElementById('main-nav-bar');
+      if (menuToggleBtn && headerNav) {
+        menuToggleBtn.addEventListener('click', () => {
+          const isActive = menuToggleBtn.classList.toggle('active');
+          headerNav.classList.toggle('active');
+          menuToggleBtn.setAttribute('aria-expanded', isActive.toString());
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+  footer h3 {
+    margin-bottom: 0;
+  }
+  .footer-links a {
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .footer-links a:hover {
+    color: var(--secondary) !important;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .hide-mobile-text {
+      display: none;
+    }
+  }
+</style>

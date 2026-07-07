@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+import config from '../../data/config.json';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('guides');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const title = `${post.data.title} | ${config.brandName}`;
+const description = post.data.description;
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={[
+      { label: "Accueil", href: "/" },
+      { label: "Guides", href: "/guides/" },
+      { label: post.data.title }
+    ]}
+  />
+
+  <Breadcrumb items={[
+    { label: "Accueil", href: "/" },
+    { label: "Guides", href: "/guides/" },
+    { label: post.data.title }
+  ]} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div class="two-column-layout" style="align-items: start;">
+        
+        <!-- Main Content -->
+        <div>
+          <article style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="post-header" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+              <span style="font-family: var(--font-mono); font-size: 14px; color: var(--secondary); font-weight: 700;">
+                📅 Publié le {new Date(post.data.publishDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} par {post.data.author || 'Conseiller Mobilité'}
+              </span>
+              <h1 style="margin: 0; font-size: clamp(24px, 5vw, 40px); color: var(--primary); line-height: 1.25; font-family: var(--font-heading); font-weight: 900;">
+                {post.data.title}
+              </h1>
+            </div>
+
+            {post.data.image && (
+              <div style="border-radius: var(--radius-md); overflow: hidden; background: linear-gradient(135deg, var(--primary-light) 0%, var(--border-color) 100%); height: clamp(200px, 30vh, 380px); width: 100%; border: 2px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 20px;">
+                <img 
+                  src={post.data.image} 
+                  alt={post.data.title} 
+                  style="width: 100%; height: 100%; object-fit: cover;" 
+                />
+              </div>
+            )}
+
+            <div class="article-markdown-body" style="font-size: 18px; line-height: 1.7; color: var(--text); display: flex; flex-direction: column; gap: 18px; font-family: var(--font-body);">
+              <Content />
+            </div>
+          </article>
+        </div>
+
+        <!-- Sidebar -->
+        <aside style="display: flex; flex-direction: column; gap: 30px;">
+          <div style="background: linear-gradient(135deg, var(--primary) 0%, #1c1917 100%); color: white; padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+            <h3 style="color: white; font-family: var(--font-heading); font-size: 22px; font-weight: 800; margin-bottom: 12px;">Besoin d'un monte-escalier dans le 30 ?</h3>
+            <p style="font-size: 15px; line-height: 1.5; margin-bottom: 20px; color: var(--primary-light);">
+              Faites estimer votre monte-escalier ou plateforme PMR. Recevez gratuitement jusqu'à 3 devis comparatifs d'installateurs agréés du Gard (30).
+            </p>
+            <a href="/devis/" class="contact-btn" style="display: block; text-align: center; background: var(--secondary); color: white !important; font-size: 16px;">Obtenir 3 Devis Gratuits</a>
+          </div>
+
+          <div style="background: white; border: 2px solid var(--border-color); border-left: 5px solid var(--secondary); border-radius: var(--radius-sm); padding: 25px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Dossiers Rénovation 30</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; padding: 0;">
+              <li><a href="/tarifs/" style="color: var(--text); font-weight: bold;">📊 Grille de Tarifs 2026</a></li>
+              <li><a href="/guide-aides-monte-escalier-30/" style="color: var(--text); font-weight: bold;">💶 Aides &amp; Financement</a></li>
+              <li><a href="/monte-escalier-maison-cevenole/" style="color: var(--text); font-weight: bold;">⛰️ Escaliers Maison Cévenole</a></li>
+              <li><a href="/communes/" style="color: var(--text); font-weight: bold;">🗺️ Toutes les Villes (30)</a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  /* Custom prose overrides for Markdown content styling inside guides */
+  .article-markdown-body h2 {
+    font-size: 24px;
+    color: var(--primary);
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 6px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+  }
+  .article-markdown-body h3 {
+    font-size: 20px;
+    color: var(--secondary);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+  }
+  .article-markdown-body p {
+    margin-bottom: 15px;
+  }
+  .article-markdown-body ul, .article-markdown-body ol {
+    margin-left: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .article-markdown-body li strong {
+    color: var(--primary);
+  }
+  .article-markdown-body blockquote {
+    border-left: 5px solid var(--secondary);
+    background-color: var(--primary-light);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+  }
+  .article-markdown-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    margin: 25px 0;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+  }
+  .article-markdown-body th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 800;
+    padding: 12px 15px;
+    text-align: left;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+  }
+  .article-markdown-body td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+  }
+  .article-markdown-body tr:last-child td {
+    border-bottom: none;
+  }
+  .article-markdown-body table th, .article-markdown-body table td {
+    font-size: 16px;
+  }
+  .article-markdown-body pre {
+    background-color: var(--primary-light) !important;
+    padding: 20px !important;
+    border-radius: var(--radius-sm) !important;
+    overflow-x: auto !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    border: 1.5px solid var(--border-color) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 15px !important;
+    color: var(--text) !important;
+    margin: 20px 0 !important;
+    max-width: 100% !important;
+  }
+  .article-markdown-body pre * {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+  .article-markdown-body code {
+    font-family: var(--font-mono) !important;
+    font-size: 0.9em !important;
+    background-color: var(--primary-light) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    color: var(--primary) !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+  aside a {
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  aside a:hover {
+    color: var(--secondary) !important;
+  }
+</style>

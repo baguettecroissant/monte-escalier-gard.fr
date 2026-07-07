@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+const title = "Monte-Escalier pour Maison Cévenole Gard (30) | Solutions Escaliers Étroits & Pierre";
+const description = "Guide complet pour installer un monte-escalier dans une maison cévenole ou de village dans le Gard (30). Solutions compactes pour escaliers tournants en pierre.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Maison Cévenole" }
+];
+
+const faqItems = [
+  {
+    q: "Peut-on installer un monte-escalier sur des marches en pierre ancienne ?",
+    a: "Oui. Nos installateurs partenaires dans le Gard utilisent le scellement chimique pour ancrer solidement le rail dans la pierre calcaire ou le grès cévenol sans risque de fendre les marches."
+  },
+  {
+    q: "Quelle est la largeur d'escalier minimale requise ?",
+    a: "Grâce à des rails fins monorails de 6 cm de diamètre et des sièges compacts avec pivotement intelligent en cours de course, nous pouvons équiper des escaliers à partir de 63-65 cm de passage libre."
+  },
+  {
+    q: "Existe-t-il des aides du département pour les maisons cévenoles ?",
+    a: "Oui, le Conseil Départemental du Gard (30) propose l'APA (Allocation Personnalisée d'Autonomie) pour financer l'adaptation du logement. Cette aide est cumulable avec le programme national MaPrimeAdapt' de l'Anah."
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl="https://monte-escalier-gard.fr/monte-escalier-maison-cevenole/"
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+    faqItems={faqItems}
+  />
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">⛰️ Patrimoine &amp; Accessibilité</span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Monte-Escalier pour Maison Cévenole dans le Gard (30)
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Les habitations historiques des Cévennes et du Gard possèdent des caractéristiques architecturales uniques : des murs épais en pierre, des escaliers raides et des passages particulièrement étroits. Voici comment adapter votre maison de village tout en préservant son charme.
+        </p>
+      </div>
+
+      <div class="two-column-layout" style="align-items: start;">
+        <!-- Left: Content Guide -->
+        <div style="font-size: 18px; line-height: 1.7; color: var(--text);">
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            1. Des rails ultra-fins adaptés aux virages serrés
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Les maisons traditionnelles gardoises possèdent fréquemment des escaliers tournants (quart-tournant ou colimaçon) maçonnés. Le cintrages sur mesure au millimètre près après relevé technique 3D laser permet d'ajuster le rail au plus près de la pierre.
+          </p>
+          <p style="margin-bottom: 15px;">
+            Nous recommandons l'utilisation de monorails fins de seulement 6 cm de diamètre. Positionnés bas et proches des marches, ils permettent de laisser la rampe historique en fer forgé en place pour le reste de la famille.
+          </p>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            2. Scellement chimique pour marches en pierre ou tomette
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Les perçages dans les marches en pierre de Vers, d'Uzès ou en dalles de schiste cévenol demandent un soin extrême. Les installateurs RGE du Gard appliquent la technique du scellement chimique :
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+            <li>Forage précis sans vibration excessive pour ne pas fendre la pierre.</li>
+            <li>Injection de résine haute performance qui fusionne avec le matériau de la marche.</li>
+            <li>Insertion d'une tige filetée en inox pour fixer les pieds de support de rail.</li>
+          </ul>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            3. Budget et aides à l'accessibilité Gard (30)
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Pour un escalier courbe sur mesure dans le Gard, le tarif moyen constaté en 2026 varie de **5 200 € à 10 500 € TTC posé** selon la complexité et les options. 
+          </p>
+          <p style="margin-bottom: 20px;">
+            Les seniors du Gard peuvent cumuler **MaPrimeAdapt'** (prise en charge de 50% à 70% par l'Anah), l'**APA 30** octroyée par le Conseil Départemental du Gard, et le crédit d'impôt de 25% pour réduire le reste à charge.
+          </p>
+
+          <div style="background: var(--primary-light); border: 2px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 40px;">
+            <h3 style="font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">💡 Conseil pratique d'expert</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+              Si le bas de votre escalier débouche directement sur un couloir étroit ou une porte menant sur la rue (fréquent dans les villages cévenols), optez pour un rail escamotable ou un rail coulissant motorisé. Il se relèvera automatiquement pour ne pas encombrer le passage.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div>
+          <StepsForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

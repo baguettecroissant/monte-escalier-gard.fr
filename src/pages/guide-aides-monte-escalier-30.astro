@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
+const title = "Aides Financières Monte-Escalier Gard (30) | ANAH, APA 30 & Crédit Impôt";
+const description = "Guide complet 2026 pour financer votre monte-escalier dans le Gard (30). Détails de MaPrimeAdapt' (Anah), l'APA du 30 et le crédit d'impôt de 25%.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Aides Financières" }
+];
+
+const faqItems = [
+  {
+    q: "Qu'est-ce que MaPrimeAdapt' ?",
+    a: "Lancée par l'Anah, MaPrimeAdapt' fusionne les anciennes aides à l'adaptation du logement. Elle finance 50% ou 70% des travaux de monte-escalier HT pour les retraités ou personnes en situation de handicap sous conditions de ressources."
+  },
+  {
+    q: "Comment fonctionne l'APA dans le Gard (30) ?",
+    a: "L'Allocation Personnalisée d'Autonomie (APA) est attribuée par le Conseil Départemental du Gard aux personnes âgées de 60 ans et plus en perte d'autonomie (GIR 1 à 4). Elle finance en partie l'aménagement du domicile."
+  },
+  {
+    q: "Le crédit d'impôt est-il disponible pour les résidences secondaires ?",
+    a: "Non, le crédit d'impôt de 25% pour l'accessibilité concerne uniquement la résidence principale de l'utilisateur."
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl="https://monte-escalier-gard.fr/guide-aides-monte-escalier-30/"
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+    faqItems={faqItems}
+  />
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">💶 Financer son Projet</span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Guide des Aides &amp; Subventions Monte-Escalier Gard (30)
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Adapter son logement dans le Gard représente un coût important. Heureusement, plusieurs dispositifs de l'État et du département (30) permettent de couvrir jusqu'à 70% à 80% du prix d'achat et de pose de votre monte-escalier.
+        </p>
+      </div>
+
+      <div class="two-column-layout" style="align-items: start;">
+        <!-- Left: Content Guide -->
+        <div style="font-size: 18px; line-height: 1.7; color: var(--text);">
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            1. MaPrimeAdapt' (Anah 2026) : Le pilier national
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Gérée par l'Agence Nationale de l'Habitat (Anah), <strong>MaPrimeAdapt'</strong> est la subvention de référence pour adapter son logement face à la perte d'autonomie. Elle s'adresse aux propriétaires occupants et locataires du secteur privé âgés de 70 ans ou plus (ou dès 60 ans sous réserve d'un justificatif de perte d'autonomie GIR 1 à 6).
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Revenus très modestes :</strong> Financement de <strong>70% HT</strong> du montant des travaux de monte-escalier.</li>
+            <li><strong>Revenus modestes :</strong> Financement de <strong>50% HT</strong> du montant des travaux.</li>
+            <li>Le plafond des travaux subventionnables est fixé à <strong>22 000 €</strong>, soit une aide pouvant atteindre 15 400 €.</li>
+          </ul>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            2. L'APA (Allocation Personnalisée d'Autonomie) du Gard (30)
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Attribuée par le Conseil Départemental du Gard, l'APA à domicile finance les denses figurant dans le plan d'aide proposé par l'équipe médico-sociale du département. Si l'installation d'un monte-escalier est jugée requise pour le maintien à domicile (GIR 1, 2, 3 ou 4), l'APA peut prendre en charge une partie du reste à charge.
+          </p>
+          <p style="margin-bottom: 20px;">
+            Le dossier est à retirer auprès du CCAS de votre commune ou d'une Maison Départementale des Solidarités (MDS) du Gard.
+          </p>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            3. Le crédit d'impôt de 25% pour l'accessibilité
+          </h2>
+          <p style="margin-bottom: 15px;">
+            Même si vous n'êtes pas imposable, vous pouvez bénéficier d'un <strong>crédit d'impôt de 25%</strong> sur les dépenses d'équipements spécialement conçus pour les personnes âgées ou handicapées (TVA et pose comprises). Le plafond des dépenses éligibles sur 5 ans est de :
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>5 000 €</strong> pour une personne célibataire, veuve ou divorcée (crédit d'impôt max de 1 250 €).</li>
+            <li><strong>10 000 €</strong> pour un couple marié ou pacsé (crédit d'impôt max de 2 500 €).</li>
+            <li>Une majoration de 120 € par personne à charge est applicable.</li>
+          </ul>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary); margin-top: 35px; margin-bottom: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+            4. TVA ultra-réduite à 5,5%
+          </h2>
+          <p style="margin-bottom: 20px;">
+            Pour encourager le maintien à domicile, l'État applique un taux de <strong>TVA réduit de 5,5%</strong> (au lieu de 20%) sur la fourniture et la pose d'équipements de sécurité pour handicapés ou seniors, dont les monte-escaliers et plateformes élévatrices. Ce taux s'applique directement sur la facture établie par l'entreprise d'installation.
+          </p>
+
+          <div style="background: var(--primary-light); border: 2px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 40px;">
+            <h3 style="font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">💡 Exemple concret de financement</h3>
+            <p style="margin-bottom: 10px;">
+              Monsieur et Madame Duval résident à Nîmes et souhaitent faire installer un monte-escalier courbe sur mesure facturé <strong>8 500 € TTC</strong>. Classés en catégorie \"revenus très modestes\" par l'Anah :
+            </p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px;">
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 10px; font-weight: 700;">Prix du monte-escalier posé</td>
+                  <td style="padding: 10px; text-align: right;" class="price-tag">8 500 €</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--secondary);">Subvention MaPrimeAdapt' (70% HT)</td>
+                  <td style="padding: 10px; text-align: right; color: var(--secondary); font-weight: bold;">- 5 640 €</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 10px; font-weight: 700;">Reste à charge avant crédit d'impôt</td>
+                  <td style="padding: 10px; text-align: right;" class="price-tag">2 860 €</td>
+                </tr>
+                <tr style="border-bottom: 2px solid var(--primary);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--secondary);">Crédit d'impôt accessibilité (25% du reste à charge)</td>
+                  <td style="padding: 10px; text-align: right; color: var(--secondary); font-weight: bold;">- 715 €</td>
+                </tr>
+                <tr style="background: #FEF3C7; font-size: 16px; font-weight: bold;">
+                  <td style="padding: 12px; color: var(--primary);">Reste à charge réel final</td>
+                  <td style="padding: 12px; text-align: right; color: var(--primary); font-size: 18px;" class="price-tag">2 145 €</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);">
+              * Cet exemple est indicatif et suppose que les travaux respectent les critères techniques d'accessibilité de l'Anah.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div>
+          <StepsForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

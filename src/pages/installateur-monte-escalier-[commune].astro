@@ -1,0 +1,431 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import StepsForm from '../components/StepsForm.astro';
+import communes from '../data/communes.json';
+import { getSmartNearbyCommunes } from '../lib/geoLinks';
+
+export async function getStaticPaths() {
+  return communes.map((c) => ({
+    params: { commune: c.slug },
+    props: { commune: c },
+  }));
+}
+
+const { commune } = Astro.props;
+
+const title = `Installateur Monte-Escalier à ${commune.nom} (${commune.codePostal}) — Devis Local & Agréé`;
+const description = `Trouvez les meilleurs installateurs de monte-escalier agréés à ${commune.nom} (${commune.codePostal}). Comparez gratuitement 3 devis de poseurs locaux certifiés.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Villes du 30", href: "/communes/" },
+  { label: `Installateur Monte-Escalier à ${commune.nom}` }
+];
+
+const nearby = getSmartNearbyCommunes(commune.slug, communes, 6, 2);
+const year = new Date().getFullYear();
+
+// Dynamic URL patterns
+const inseeLink = `https://www.insee.fr/fr/statistiques/1405599?geo=COM-${commune.codeInsee}`;
+const pluLink = `https://www.geoportail-urbanisme.gouv.fr/map/#tile=1&zoom=13&lat=${commune.latitude}&lon=${commune.longitude}&compareMap=0`;
+const departementLink = `https://www.gard.fr/les-solidarites/personnes-agees.html`;
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    faqItems={commune.faq}
+    breadcrumbItems={[
+      { label: "Accueil", href: "/" },
+      { label: "Villes du 30", href: "/communes/" },
+      { label: `Installateur Monte-Escalier à ${commune.nom}` }
+    ]}
+    communeName={commune.nom}
+    communeData={commune}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <section style="background: linear-gradient(135deg, rgba(6,95,70,0.07) 0%, rgba(185,28,28,0.04) 100%); padding: 55px 0; border-bottom: 1.5px solid var(--border-color);">
+    <div class="container">
+      <div class="two-column-layout">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="badge-pill" style="width: max-content; margin-bottom: 20px;">
+            👤 Installateurs Agréés — {commune.nom} ({commune.codePostal})
+          </div>
+          <h1 style="font-family: var(--font-heading); font-size: 38px; font-weight: 900; color: var(--primary); line-height: 1.2; margin-bottom: 20px;">
+            Trouver un Installateur Monte-Escalier à <span style="color: var(--secondary);">{commune.nom}</span>
+          </h1>
+          <p style="font-size: 18px; line-height: 1.7; color: var(--text); margin-bottom: 25px;">
+            Faire poser un monte-escalier à {commune.nom} nécessite un installateur qualifié possédant les assurances obligatoires (responsabilité décennale) et habilité par l'Anah pour l'obtention des aides de l'État. Nos techniciens locaux se déplacent gratuitement chez vous sous 48 heures dans le Gard pour évaluer votre escalier.
+          </p>
+
+          <!-- Key data pills -->
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px;">
+            <span style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 6px 14px; border-radius: 30px; font-size: 14px; font-weight: 700; color: var(--primary);">
+              👷 {commune.marketData.installateursAgrees} professionnels certifiés dans le 30
+            </span>
+            <span style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 6px 14px; border-radius: 30px; font-size: 14px; font-weight: 700; color: var(--primary);">
+              📍 CCAS &amp; MDA proches
+            </span>
+            <span style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 6px 14px; border-radius: 30px; font-size: 14px; font-weight: 700; color: var(--primary);">
+              ⚡ Dépannage local sous 24h
+            </span>
+          </div>
+
+          <div style="background: white; border: 2px solid var(--border-color); border-left: 5px solid var(--secondary); padding: 20px; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);">
+            <div style="font-weight: 800; color: var(--secondary); margin-bottom: 8px; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em;">💡 Comment choisir votre installateur</div>
+            <p style="font-size: 16px; color: var(--text-muted); margin: 0; line-height: 1.6;">
+              {commune.choixInstallateurText}
+            </p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <StepsForm initialZip={commune.codePostal} initialCommune={commune.nom} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Data Authority Panel -->
+  <section style="padding: 50px 0; background-color: var(--primary); color: white;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 35px;">
+        <h2 style="font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: white; margin-bottom: 10px;">
+          Données Démographiques &amp; Marché Accessibilité — {commune.nom} ({commune.codePostal}) en {year}
+        </h2>
+        <p style="color: #ECFDF5; font-size: 16px;">Statistiques issues des recensements officiels et indicateurs du secteur de la dépendance dans le 30.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto;">
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.population.toLocaleString('fr-FR')}</div>
+          <div style="font-size: 13px; color: #ECFDF5; text-transform: uppercase; letter-spacing: 0.06em;">Population totale</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.marketData.seniorPercentage} %</div>
+          <div style="font-size: 13px; color: #ECFDF5; text-transform: uppercase; letter-spacing: 0.06em;">Seniors (+60 ans)</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.marketData.population75Plus.toLocaleString('fr-FR')}</div>
+          <div style="font-size: 13px; color: #EFF6FF; text-transform: uppercase; letter-spacing: 0.06em;">Seniors (+75 ans)</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.marketData.installateursAgrees}</div>
+          <div style="font-size: 13px; color: #ECFDF5; text-transform: uppercase; letter-spacing: 0.06em;">Installateurs actifs (30)</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.marketData.delaiMoyenJours} jours</div>
+          <div style="font-size: 13px; color: #ECFDF5; text-transform: uppercase; letter-spacing: 0.06em;">Délai moyen d'étude</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.12);">
+          <div style="font-family: var(--font-mono); font-size: 28px; font-weight: 800; color: #FDE68A; margin-bottom: 6px;">{commune.altitude} m</div>
+          <div style="font-size: 13px; color: #ECFDF5; text-transform: uppercase; letter-spacing: 0.06em;">Altitude moyenne</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Section -->
+  <section style="padding: 70px 0; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Pourquoi passer par un installateur certifié à {commune.nom} ?
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted);">
+          Garanties réglementaires, sécurité de fonctionnement et éligibilité aux subventions régionales du 30.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div style="font-size: 32px; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Garantie Décennale</h3>
+          <p style="font-size: 16px; color: var(--text-muted); line-height: 1.65; margin: 0;">
+            {commune.garantieDecennaleText}
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 32px; margin-bottom: 12px;">⚡</div>
+          <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Maintenance &amp; SAV 24/7</h3>
+          <p style="font-size: 16px; color: var(--text-muted); line-height: 1.65; margin: 0;">
+            {commune.maintenanceSavText}
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 32px; margin-bottom: 12px;">💶</div>
+          <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">Montage des dossiers d'aides</h3>
+          <p style="font-size: 16px; color: var(--text-muted); line-height: 1.65; margin: 0;">
+            {commune.montageDossierText}
+          </p>
+        </div>
+      </div>
+
+      <!-- Maison Départementale des Solidarités (MDS 30) Direct Contact Info -->
+      {commune.closestMDA && (
+        <div style="margin-top: 40px; padding: 25px; background: linear-gradient(135deg, rgba(6,95,70,0.03) 0%, rgba(185,28,28,0.02) 100%); border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+          <div style="max-width: 580px; text-align: left;">
+            <h4 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--primary); margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">
+              🏢 {commune.closestMDA.nom}
+            </h4>
+            <p style="font-size: 15px; color: var(--text-muted); margin: 0 0 12px 0; line-height: 1.55;">
+              Pour vos demandes d'APA (Allocation Personnalisée d'Autonomie) ou de PCH dans le secteur de {commune.nom}, cette antenne du Département du Gard instruit votre dossier de prise en charge et coordonne le passage d'un ergothérapeute conseil.
+            </p>
+            <div style="font-size: 14px; color: var(--text); font-weight: bold; display: flex; flex-wrap: wrap; gap: 15px;">
+              <span>📍 Adresse : {commune.closestMDA.adresse}, {commune.closestMDA.codePostal} {commune.closestMDA.ville}</span>
+              <span>📞 Tél : {commune.closestMDA.telephone}</span>
+            </div>
+          </div>
+          <div>
+            <a href={departementLink} target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 12px 22px; font-size: 14px; font-weight: 800; border-radius: 30px; display: inline-block; text-decoration: none;">
+              📄 Formulaire APA &rarr;
+            </a>
+          </div>
+        </div>
+      )}
+
+      <!-- Stairlift Characteristics Detail -->
+      {commune.stairliftCharacteristics && (
+        <div style="margin-top: 50px; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-sm);">
+          <h3 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            🔧 Caractéristiques Techniques préconisées à {commune.nom}
+          </h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+            <div style="padding: 16px; background: var(--primary-light); border-radius: 12px; border-left: 4px solid var(--secondary);">
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Configuration</div>
+              <div style="font-size: 16px; color: var(--primary); font-weight: 800;">{commune.stairliftCharacteristics.typeEscalier}</div>
+            </div>
+            <div style="padding: 16px; background: var(--primary-light); border-radius: 12px; border-left: 4px solid var(--secondary);">
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Rail de Guidage</div>
+              <div style="font-size: 16px; color: var(--primary); font-weight: 800;">{commune.stairliftCharacteristics.rail}</div>
+            </div>
+            <div style="padding: 16px; background: var(--primary-light); border-radius: 12px; border-left: 4px solid var(--secondary);">
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Option Conseillée</div>
+              <div style="font-size: 16px; color: var(--primary); font-weight: 800;">{commune.stairliftCharacteristics.option}</div>
+            </div>
+            <div style="padding: 16px; background: var(--primary-light); border-radius: 12px; border-left: 4px solid var(--secondary);">
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Charge Utile</div>
+              <div style="font-size: 16px; color: var(--primary); font-weight: 800;">{commune.stairliftCharacteristics.chargeUtile}</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Real Estate PMR Impact Section -->
+  <section style="padding: 70px 0; background-color: white; border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 950px;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-heading); font-size: 30px; font-weight: 800; color: var(--primary); margin-bottom: 12px;">
+          Maintien à Domicile &amp; Valorisation Foncière à {commune.nom}
+        </h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 25px; font-size: 17px; line-height: 1.7; color: var(--text);">
+        <p set:html={commune.realEstateImpactText}></p>
+        <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); border-left: 5px solid var(--secondary);">
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">📈 Plus-value foncière estimée</h3>
+          <p style="margin: 0; font-size: 16px; color: var(--text-muted);" set:html={commune.plusValueFonciereText}></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prices Table -->
+  <section style="padding: 70px 0; background-color: var(--primary-light); border-top: 1.5px solid var(--border-color); border-bottom: 1.5px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 45px;">
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; color: var(--primary); margin-bottom: 12px;">
+          Combien coûte l'installation à {commune.nom} ?
+        </h2>
+        <p style="font-size: 18px; color: var(--text-muted);">
+          Prix moyens TTC (fourniture &amp; pose incluses) pour le secteur de {commune.nom} ({commune.codePostal}) avant aides.
+        </p>
+      </div>
+
+      <div style="max-width: 900px; margin: 0 auto; overflow-x: auto; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 16px;">
+          <thead>
+            <tr style="background: var(--primary); color: white;">
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Type d'Installation</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Budget Posé</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Délai de Pose</th>
+              <th style="padding: 16px 20px; font-family: var(--font-heading); font-weight: 800;">Garantie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Monte-escalier droit (intérieur)</td>
+              <td style="padding: 15px 20px;"><span class="price-tag">2 400 – 4 800 €</span></td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">2 à 4 heures</td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">Garantie 2 à 5 ans</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Monte-escalier courbe (1 virage)</td>
+              <td style="padding: 15px 20px;"><span class="price-tag">5 200 – 8 000 €</span></td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">Une demi-journée</td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">Sur mesure certifié</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Monte-escalier courbe (multi-paliers)</td>
+              <td style="padding: 15px 20px;"><span class="price-tag">8 000 – 10 500 €</span></td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">1 jour complet</td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">Sur mesure certifié</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color); background: var(--primary-light);">
+              <td style="padding: 15px 20px; font-weight: bold; color: var(--primary);">Monte-escalier extérieur (étanche)</td>
+              <td style="padding: 15px 20px;"><span class="price-tag">3 800 – 8 500 €</span></td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">4 à 6 heures</td>
+              <td style="padding: 15px 20px; color: var(--text-muted);">Traité anti-corrosion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Silo Double Link Box -->
+      <div style="margin-top: 40px; background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; text-align: center; box-shadow: var(--shadow-sm);">
+        <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px;">
+          ♿ Vous recherchez un guide technique d'accessibilité sur cette commune ?
+        </h3>
+        <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 20px;">
+          Découvrez notre dossier complet sur les aides régionales, les normes d'installation et les caractéristiques préconisées pour {commune.nom}.
+        </p>
+        <a href={`/monte-escalier-${commune.slug}/`} class="btn-primary" style="display: inline-block;">
+          ♿ Voir le guide d'installation sur {commune.nom} &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Social & CCAS Resources Section -->
+  <section style="padding: 60px 0; background-color: var(--card-bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 950px;">
+      <h3 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 25px; text-align: center;">
+        🏛️ Accompagnement Social &amp; Aides Locales à {commune.nom}
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
+        
+        <!-- CCAS Card -->
+        <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; box-shadow: var(--shadow-sm);">
+          <h4 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            🏢 CCAS de {commune.nom}
+          </h4>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Pour déposer un dossier de subvention MaPrimeAdapt' ou demander une visite d'évaluation d'autonomie à domicile :
+          </p>
+          <ul style="list-style: none; padding: 0; font-size: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>📍 Adresse :</strong> {commune.ccasContact.adresse}, {commune.codePostal} {commune.nom}</li>
+            <li><strong>📞 Téléphone :</strong> {commune.ccasContact.telephone}</li>
+            <li><strong>💬 Accueil :</strong> Mairie ou service social de {commune.nom}</li>
+          </ul>
+        </div>
+
+        <!-- MDA Card -->
+        <div style="background: white; border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; box-shadow: var(--shadow-sm);">
+          <h4 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            👵 MDA / MDS Proche ({commune.closestMDA.ville})
+          </h4>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+            Antenne de la Maison Départementale de l'Autonomie (MDA) ou Maison Départementale des Solidarités (MDS) pour l'attribution de l'APA 30 :
+          </p>
+          <ul style="list-style: none; padding: 0; font-size: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>🏢 Service :</strong> {commune.closestMDA.nom}</li>
+            <li><strong>📍 Adresse :</strong> {commune.closestMDA.adresse}, {commune.closestMDA.codePostal} {commune.closestMDA.ville}</li>
+            <li><strong>📞 Téléphone :</strong> {commune.closestMDA.telephone}</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Official Resources & External Links -->
+  <section style="padding: 60px 0; background-color: white; border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 950px;">
+      <h3 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 25px; text-align: center;">
+        📚 Ressources Officielles Accessibilité &amp; Urbanisme à {commune.nom}
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <a href={inseeLink} target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">📊</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">INSEE — {commune.nom}</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Données démographiques et sociales locales</div>
+          </div>
+        </a>
+        <a href={pluLink} target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">🗺️</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">Géoportail de l'Urbanisme</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Cadastre et PLU officiels à {commune.nom}</div>
+          </div>
+        </a>
+        <a href={departementLink} target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">💶</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">Dossier APA — Gard (30)</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Demande d'aide à l'autonomie départementale</div>
+          </div>
+        </a>
+        <a href="https://www.maprimerenov.gouv.fr/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">🏠</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">MaPrimeAdapt' / Anah</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Subvention nationale d'adaptation de l'habitat</div>
+          </div>
+        </a>
+        <a href="https://www.adil30.org/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">⚖️</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">ADIL du Gard (ADIL 30)</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Conseil juridique et financier gratuit sur le logement</div>
+          </div>
+        </a>
+        <a href="https://www.carsat-lr.fr/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 12px; background: var(--bg); border: 2px solid var(--border-color); padding: 16px 20px; border-radius: var(--radius-sm); text-decoration: none;">
+          <span style="font-size: 26px;">👴</span>
+          <div>
+            <div style="font-weight: 800; color: var(--primary); font-size: 14.5px;">CARSAT Languedoc-Roussillon</div>
+            <div style="color: var(--text-muted); font-size: 12.5px;">Aides financières au bien vieillir à domicile</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Geographic proximity siloing -->
+  <section style="padding: 50px 0; background-color: var(--bg); border-top: 1.5px solid var(--border-color);">
+    <div class="container" style="max-width: 900px;">
+      <h3 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 25px; text-align: center;">
+        📍 Installateurs de Monte-Escaliers aux Communes Voisines
+      </h3>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+        {nearby.map((n) => (
+          <a href={`/installateur-monte-escalier-${n.slug}/`} style="background: white; border: 2px solid var(--border-color); padding: 8px 18px; border-radius: 30px; font-size: 15px; font-weight: 800; color: var(--primary); transition: var(--transition); text-decoration: none;">
+            🏠 {n.nom} ({n.codePostal})
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  th, td {
+    border-bottom: 1px solid var(--border-color);
+  }
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

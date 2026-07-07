@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StepsForm from '../components/StepsForm.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const title = "Demande de Devis Monte-Escalier Gratuit — Gard (30) | Installation & Aides";
+const description = "Estimez rapidement le prix de votre monte-escalier droit, tournant ou extérieur dans le Gard (30). Obtenez 3 devis comparatifs gratuits d'installateurs locaux.";
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Demande de Devis Monte-Escalier" }
+];
+---
+
+<Layout title={title} description={description}>
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 50px 0 80px; background: linear-gradient(135deg, rgba(6,95,70,0.04) 0%, rgba(185,28,28,0.02) 100%);">
+    <div class="container" style="max-width: 800px;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="badge-pill" style="margin-bottom: 15px;">⏱️ Simulation en 2 minutes</span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 15px;">
+          Votre Devis Monte-Escalier dans le Gard
+        </h1>
+        <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+          Remplissez notre formulaire intelligent pour estimer le budget de votre projet d'accessibilité. Nous transmettons votre demande uniquement à des installateurs agréés du 30 proches de chez vous.
+        </p>
+      </div>
+
+      <div>
+        <StepsForm />
+      </div>
+
+      <div class="grid-3" style="margin-top: 60px; text-align: center; gap: 20px;">
+        <div style="background: white; border: 2px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
+          <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">1. Décrivez votre projet</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5; margin: 0;">Indiquez la forme de votre escalier, le matériau des marches, et l'urgence de l'installation.</p>
+        </div>
+        
+        <div style="background: white; border: 2px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 32px; margin-bottom: 10px;">📞</div>
+          <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">2. Étude Téléphonique</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5; margin: 0;">Un expert local valide vos choix par téléphone pour estimer votre reste à charge réel après aides du 30.</p>
+        </div>
+
+        <div style="background: white; border: 2px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+          <div style="font-size: 32px; margin-bottom: 10px;">🤝</div>
+          <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">3. Comparez &amp; Choisissez</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5; margin: 0;">Recevez gratuitement et sans engagement jusqu'à 3 offres sur mesure de poseurs qualifiés basés dans le 30.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
