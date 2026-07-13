@@ -33,6 +33,28 @@ const breadcrumbItems = [
         <div><strong>Statut du dossier :</strong> <span style="color: var(--secondary); font-weight: bold;">Validation téléphonique requise</span></div>
       </div>
 
+      
+  <!-- ViteUnDevis Spinner — Améliore le taux de validation SMS de +20% -->
+  <div id="vud_spin_163639" style="margin: 25px auto; max-width: 500px;"></div>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const devisId = params.get('devis_id');
+      const devisHash = params.get('devis_hash');
+      
+      if (devisId && devisHash) {
+        const vud_js = document.createElement('script');
+        vud_js.type = 'text/javascript';
+        vud_js.src = 'https://www.viteundevis.com/mb/spinner.php?devis_id=' + devisId + '&devis_hash=' + devisHash + '&box=163639';
+        const s = document.getElementsByTagName('script')[0];
+        if (s && s.parentNode) {
+          s.parentNode.insertBefore(vud_js, s);
+        } else {
+          document.body.appendChild(vud_js);
+        }
+      }
+    });
+  </script>
       <a href="/" class="btn-primary" style="display: inline-block;">Retour à l'accueil</a>
     </div>
   </section>
