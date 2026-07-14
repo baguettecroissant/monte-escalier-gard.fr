@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://monte-escalier-gard.fr',
+  site: 'https://monte-escalier30.fr',
   output: 'static',
   adapter: cloudflare({
     imageService: 'passthrough'

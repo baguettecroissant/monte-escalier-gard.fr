@@ -22,7 +22,7 @@ Contrairement aux polices traditionnelles qui privilégient l'esthétique géom�
 - **Ouvertures larges** : Les lettres à boucles ouvertes (comme le "c", "e" ou "o") sont élargies pour éviter qu'elles ne se transforment en cercles indistincts sous l'effet du flou visuel.
 - **Grands contrastes de traits** : Les épaisseurs de lignes sont équilibrées pour maintenir la forme du caractère visible même sous faible contraste ou fort agrandissement.
 
-C'est pourquoi notre site internet `monte-escalier-gard.fr` utilise exclusivement Atkinson Hyperlegible, assurant un confort de lecture optimal pour nos visiteurs seniors. De même, les livrets d'utilisation imprimés remis aux clients par nos installateurs partenaires du 30 adoptent cette charte graphique inclusive.
+C'est pourquoi notre site internet `monte-escalier30.fr` utilise exclusivement Atkinson Hyperlegible, assurant un confort de lecture optimal pour nos visiteurs seniors. De même, les livrets d'utilisation imprimés remis aux clients par nos installateurs partenaires du 30 adoptent cette charte graphique inclusive.
 
 ---
 

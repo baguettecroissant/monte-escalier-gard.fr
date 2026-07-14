@@ -4,7 +4,7 @@
  */
 
 // ── Site-specific config (change per R&R site) ──
-const SITE_DOMAIN = 'monte-escalier-gard.fr';
+const SITE_DOMAIN = 'monte-escalier30.fr';
 const SITE_NICHE = 'monte-escalier';
 const DEPT_CODE = '30';
 const CP_PATTERN = /^30\d{3}$/;

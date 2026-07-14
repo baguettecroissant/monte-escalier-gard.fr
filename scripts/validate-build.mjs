@@ -61,7 +61,7 @@ htmlFiles.forEach((filePath) => {
     errors++;
   } else {
     const href = canonicalMatch[1];
-    if (!href.startsWith('https://monte-escalier-gard.fr/')) {
+    if (!href.startsWith('https://monte-escalier30.fr/')) {
       console.error(`❌ ERROR: Invalid canonical domain in ${relativePath}: ${href}`);
       errors++;
     }
@@ -127,7 +127,7 @@ if (!existsSync(robotsPath)) {
   errors++;
 } else {
   const robotsContent = readFileSync(robotsPath, 'utf-8');
-  if (!robotsContent.includes('Sitemap: https://monte-escalier-gard.fr/sitemap-index.xml')) {
+  if (!robotsContent.includes('Sitemap: https://monte-escalier30.fr/sitemap-index.xml')) {
     console.error("❌ ERROR: robots.txt is missing Sitemap declaration!");
     errors++;
   }
